@@ -173,6 +173,27 @@
   </table>
 </section>
 
+<section id="registros" class="tela escondida">
+  <h2>Registros Gerais</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Setor</th>
+        <th>Tipo</th>
+        <th>Responsável</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Motivo / Insumo</th>
+        <th>Observação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaRegistros"></tbody>
+  </table>
+</section>
+
 <section id="relatorios" class="tela escondida">
   <h2>Relatórios</h2>
 
@@ -221,6 +242,8 @@
     <tbody id="tabelaRelatorio"></tbody>
   </table>
 </section>
+
+<button onclick="mostrarTela('registros'); fecharMenu()">Registros Gerais</button>
 
 <section id="pessoas" class="tela escondida">
   <h2>Cadastro de Pessoas</h2>
