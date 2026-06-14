@@ -1,0 +1,217 @@
+:root {
+  --verde: #015001;
+  --vermelho: #a22022;
+  --marrom: #914919;
+  --bege: #eadac0;
+  --preto: #000000;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bege);
+  margin: 0;
+  padding: 0;
+  color: var(--preto);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: white;
+  padding: 20px 35px;
+  border-bottom: 5px solid var(--verde);
+}
+
+.logo {
+  width: 180px;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.topo h1 {
+  margin: 0;
+  color: var(--verde);
+}
+
+.topo p {
+  margin: 5px 0 0;
+  color: var(--marrom);
+}
+
+.botao-menu {
+  width: auto;
+  background: transparent;
+  color: var(--verde);
+  font-size: 32px;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.botao-menu:hover {
+  background: transparent;
+  color: var(--vermelho);
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 260px;
+  height: 100vh;
+  background: var(--preto);
+  padding: 25px 18px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.menu-lateral.aberto {
+  left: 0;
+}
+
+.menu-lateral button {
+  width: 100%;
+  background: transparent;
+  color: white;
+  border-bottom: 1px solid var(--marrom);
+  text-align: left;
+  border-radius: 0;
+  margin: 0;
+  padding: 16px 10px;
+}
+
+.menu-lateral button:hover {
+  background: var(--verde);
+}
+
+.fechar-menu {
+  font-size: 28px;
+  text-align: right !important;
+  border-bottom: none !important;
+  color: var(--bege) !important;
+}
+
+.fundo-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 999;
+}
+
+.fundo-menu.ativo {
+  display: block;
+}
+
+.tela {
+  padding: 30px;
+}
+
+h2, h3 {
+  color: var(--verde);
+}
+
+form {
+  background: white;
+  padding: 25px;
+  max-width: 550px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border-left: 6px solid var(--marrom);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+label {
+  display: block;
+  margin-top: 14px;
+  font-weight: bold;
+  color: var(--preto);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  margin-top: 6px;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  background: var(--verde);
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: var(--vermelho);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+th {
+  background: var(--verde);
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background: #f7f1e8;
+}
+
+ul {
+  background: white;
+  padding: 20px;
+  max-width: 550px;
+  border-radius: 8px;
+}
+
+li {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.excluir {
+  background: var(--vermelho);
+  color: white;
+}
+
+.pequeno {
+  width: auto;
+  padding: 6px 10px;
+  margin-left: 15px;
+}
+
+.escondida {
+  display: none;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid var(--marrom);
+  margin: 30px 0;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1781393690640,
+    "categoria": "estoque seco",
+    "nome": "farinha de trigo",
+    "unidade": "kg"
+  },
+  {
+    "id": 1781393946637,
+    "categoria": "estoque seco",
+    "nome": "acucar",
+    "unidade": "kg"
+  },
+  {
+    "id": 1781394053123,
+    "categoria": "estoque frio",
+    "nome": "cream cheese",
+    "unidade": "kg"
+  }
+]

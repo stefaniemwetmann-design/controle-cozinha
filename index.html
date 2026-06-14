@@ -1,132 +1,297 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Cozinha - Desperdício e Produção</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Controle de Cozinha</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🍳 Controle de Cozinha</h1>
-            <p>Sistema de Controle de Desperdício e Produção</p>
-        </header>
 
-        <main>
-            <section class="form-section">
-                <h2>Registrar Desperdício ou Produção</h2>
-                <form id="registroForm">
-                    <div class="form-group">
-                        <label for="tipo">Tipo de Registro:</label>
-                        <select id="tipo" required>
-                            <option value="">Selecione...</option>
-                            <option value="desperdicio">Desperdício</option>
-                            <option value="producao">Produção</option>
-                        </select>
-                    </div>
+<header class="topo">
+  <button class="botao-menu" onclick="abrirMenu()">☰</button>
 
-                    <div class="form-group">
-                        <label for="funcionario">Nome de Quem Está Lançando:</label>
-                        <select id="funcionario" required>
-                            <option value="">Selecione...</option>
-                            <option value="João Silva">João Silva</option>
-                            <option value="Maria Santos">Maria Santos</option>
-                            <option value="Carlos Oliveira">Carlos Oliveira</option>
-                            <option value="Ana Costa">Ana Costa</option>
-                            <option value="Pedro Ferreira">Pedro Ferreira</option>
-                        </select>
-                        <small>Adicionar novo funcionário? Use o campo abaixo</small>
-                        <input type="text" id="novoFuncionario" placeholder="Digite o nome e pressione Enter">
-                    </div>
+  <img src="logo.png" alt="FS Gastronomia e Consultoria" class="logo">
 
-                    <div class="form-group" id="motivoGroup">
-                        <label for="motivo">Motivo do Desperdício:</label>
-                        <select id="motivo">
-                            <option value="">Selecione...</option>
-                            <option value="queimado">Queimado</option>
-                            <option value="vencido">Vencido</option>
-                            <option value="danificado">Danificado</option>
-                            <option value="mal-preparado">Mal Preparado</option>
-                            <option value="sobra">Sobra de Produção</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
+  <div>
+    <h1>Controle de Cozinha</h1>
+    <p>Produção, desperdício e relatórios</p>
+  </div>
+</header>
 
-                    <div class="form-group" id="producaoGroup" style="display: none;">
-                        <label for="utilizado">Quantidade Utilizada (kg/L):</label>
-                        <input type="number" id="utilizado" step="0.1" placeholder="Ex: 5.5">
-                    </div>
+<nav id="menuLateral" class="menu-lateral">
+  <button class="fechar-menu" onclick="fecharMenu()">×</button>
 
-                    <div class="form-group" id="produziuGroup" style="display: none;">
-                        <label for="produzido">Quantidade Produzida (porções/unidades):</label>
-                        <input type="number" id="produzido" step="0.1" placeholder="Ex: 50">
-                    </div>
+  <button onclick="mostrarTela('producao'); fecharMenu()">Lançar Produção</button>
+  <button onclick="mostrarTela('desperdicio'); fecharMenu()">Lançar Desperdício</button>
+  <button onclick="mostrarTela('relatorios'); fecharMenu()">Relatórios</button>
+  <button onclick="mostrarTela('pessoas'); fecharMenu()">Pessoas</button>
+  <button onclick="mostrarTela('setores'); fecharMenu()">Setores</button>
+  <button onclick="mostrarTela('produtos'); fecharMenu()">Produtos</button>
+  <button onclick="mostrarTela('motivos'); fecharMenu()">Motivos</button>
+</nav>
 
-                    <div class="form-group">
-                        <label for="quantidade">Quantidade (kg/L/porções):</label>
-                        <input type="number" id="quantidade" step="0.1" required placeholder="Ex: 2.5">
-                    </div>
+<div id="fundoMenu" class="fundo-menu" onclick="fecharMenu()"></div>
 
-                    <div class="form-group">
-                        <label for="descricao">Descrição Adicional:</label>
-                        <textarea id="descricao" placeholder="Observações ou detalhes adicionais..." rows="3"></textarea>
-                    </div>
+<section id="producao" class="tela">
+  <h2>Lançar Produção</h2>
 
-                    <div class="form-group">
-                        <label for="data">Data:</label>
-                        <input type="date" id="data" required>
-                    </div>
+  <form id="formProducao">
+    <h3>Informações gerais</h3>
 
-                    <button type="submit" class="btn-submit">Registrar</button>
-                </form>
-            </section>
+    <label>Data</label>
+    <input type="date" id="dataProducao" required>
 
-            <section class="registros-section">
-                <h2>Histórico de Registros</h2>
-                <div class="filtros">
-                    <input type="text" id="filtroFuncionario" placeholder="Filtrar por funcionário...">
-                    <select id="filtroTipo">
-                        <option value="">Todos</option>
-                        <option value="desperdicio">Desperdício</option>
-                        <option value="producao">Produção</option>
-                    </select>
-                    <button id="btnLimparFiltros" class="btn-secundario">Limpar Filtros</button>
-                </div>
+    <label>Setor</label>
+    <select id="setorProducao" required></select>
 
-                <div id="registrosContainer" class="registros-container">
-                    <p class="vazio">Nenhum registro encontrado.</p>
-                </div>
-            </section>
+    <label>Responsável</label>
+    <select id="responsavelProducao" required></select>
 
-            <section class="relatorio-section">
-                <h2>📊 Relatório Rápido</h2>
-                <div class="relatorio-grid">
-                    <div class="relatorio-card">
-                        <h3>Total de Desperdícios</h3>
-                        <p id="totalDesperdicio" class="numero">0</p>
-                    </div>
-                    <div class="relatorio-card">
-                        <h3>Total de Produções</h3>
-                        <p id="totalProducao" class="numero">0</p>
-                    </div>
-                    <div class="relatorio-card">
-                        <h3>Quantidade Total Desperdiçada</h3>
-                        <p id="quantidadeDesperdicio" class="numero">0 kg/L</p>
-                    </div>
-                    <div class="relatorio-card">
-                        <h3>Quantidade Total Produzida</h3>
-                        <p id="quantidadeProducao" class="numero">0 un</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <hr>
 
-        <footer>
-            <p>&copy; 2026 Controle de Cozinha - Desenvolvido com ❤️</p>
-        </footer>
-    </div>
+    <h3>Produtos produzidos</h3>
 
-    <script src="script.js"></script>
+    <label>Produto produzido</label>
+    <select id="produtoProducao"></select>
+
+    <label>Quantidade produzida</label>
+    <input type="number" id="quantidadeProducao" step="0.01">
+
+    <label>Unidade</label>
+    <select id="unidadeProducao">
+      <option value="kg">kg</option>
+      <option value="g">g</option>
+      <option value="L">L</option>
+      <option value="ml">ml</option>
+      <option value="un">un</option>
+      <option value="mç">mç</option>
+    </select>
+
+    <label>Insumo utilizado</label>
+    <textarea id="insumoProducao" placeholder="Ex: 5 kg tomate, 2 kg cebola, 1 L azeite"></textarea>
+
+    <label>Observação</label>
+    <textarea id="observacaoProducao"></textarea>
+
+    <button type="button" onclick="adicionarItemProducao()">Adicionar produto no lote</button>
+    <button type="submit">Lançar produção</button>
+  </form>
+
+  <h3>Itens de produção adicionados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Insumo utilizado</th>
+        <th>Observação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaLoteProducao"></tbody>
+  </table>
+
+  <h2>Registros</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Setor</th>
+        <th>Tipo</th>
+        <th>Responsável</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Motivo / Insumo</th>
+        <th>Observação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaRegistros"></tbody>
+  </table>
+</section>
+
+<section id="desperdicio" class="tela escondida">
+  <h2>Lançar Desperdício</h2>
+
+  <form id="formDesperdicio">
+    <h3>Informações gerais</h3>
+
+    <label>Data</label>
+    <input type="date" id="dataDesperdicio" required>
+
+    <label>Setor</label>
+    <select id="setorDesperdicio" required></select>
+
+    <label>Responsável</label>
+    <select id="responsavelDesperdicio" required></select>
+
+    <hr>
+
+    <h3>Produtos descartados</h3>
+
+    <label>Produto descartado</label>
+    <select id="produtoDesperdicio"></select>
+
+    <label>Quantidade descartada</label>
+    <input type="number" id="quantidadeDesperdicio" step="0.01">
+
+    <label>Unidade</label>
+    <select id="unidadeDesperdicio">
+      <option value="kg">kg</option>
+      <option value="g">g</option>
+      <option value="L">L</option>
+      <option value="ml">ml</option>
+      <option value="un">un</option>
+      <option value="mç">mç</option>
+    </select>
+
+    <label>Motivo</label>
+    <select id="motivoDesperdicio"></select>
+
+    <label>Observação</label>
+    <textarea id="observacaoDesperdicio"></textarea>
+
+    <button type="button" onclick="adicionarItemDesperdicio()">Adicionar produto no lote</button>
+    <button type="submit">Lançar desperdício</button>
+  </form>
+
+  <h3>Itens de desperdício adicionados</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Motivo</th>
+        <th>Observação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaLoteDesperdicio"></tbody>
+  </table>
+</section>
+
+<section id="relatorios" class="tela escondida">
+  <h2>Relatórios</h2>
+
+  <form id="formRelatorio">
+    <label>Data inicial</label>
+    <input type="date" id="filtroDataInicio">
+
+    <label>Data final</label>
+    <input type="date" id="filtroDataFim">
+
+    <label>Setor</label>
+    <select id="filtroSetor"></select>
+
+    <label>Categoria</label>
+    <select id="filtroCategoria"></select>
+
+    <label>Produto</label>
+    <select id="filtroProduto"></select>
+
+    <label>Usuário</label>
+    <select id="filtroResponsavel"></select>
+
+    <label>Motivo de desperdício</label>
+    <select id="filtroMotivo"></select>
+
+    <button type="submit">Gerar relatório</button>
+    <button type="button" onclick="exportarRelatorioExcel()">Exportar para Excel</button>
+  </form>
+
+  <h3>Resultado do relatório</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Setor</th>
+        <th>Tipo</th>
+        <th>Responsável</th>
+        <th>Categoria</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Motivo / Insumo</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaRelatorio"></tbody>
+  </table>
+</section>
+
+<section id="pessoas" class="tela escondida">
+  <h2>Cadastro de Pessoas</h2>
+
+  <form id="formPessoa">
+    <input type="text" id="nomePessoa" placeholder="Nome da pessoa" required>
+    <button type="submit">Cadastrar pessoa</button>
+  </form>
+
+  <ul id="listaPessoas"></ul>
+</section>
+
+<section id="setores" class="tela escondida">
+  <h2>Cadastro de Setores</h2>
+
+  <form id="formSetor">
+    <input type="text" id="nomeSetor" placeholder="Nome do setor" required>
+    <button type="submit">Cadastrar setor</button>
+  </form>
+
+  <ul id="listaSetores"></ul>
+</section>
+
+<section id="produtos" class="tela escondida">
+  <h2>Cadastro de Produtos</h2>
+
+  <form id="formProduto">
+    <label>Categoria</label>
+    <input type="text" id="categoriaProduto" required>
+
+    <label>Produto</label>
+    <input type="text" id="nomeProduto" required>
+
+    <label>Unidade de Medida</label>
+    <select id="unidadeProduto" required>
+      <option value="">Selecione</option>
+      <option value="kg">kg</option>
+      <option value="g">g</option>
+      <option value="L">L</option>
+      <option value="ml">ml</option>
+      <option value="un">un</option>
+      <option value="mç">mç</option>
+    </select>
+
+    <button type="submit">Cadastrar produto</button>
+  </form>
+
+  <hr>
+
+  <h3>Importação por Planilha</h3>
+
+  <p>Modelo CSV: categoria,produto,unidade</p>
+
+  <input type="file" id="arquivoProdutos" accept=".csv">
+
+  <button type="button" onclick="importarProdutos()">Importar Produtos</button>
+
+  <ul id="listaProdutos"></ul>
+</section>
+
+<section id="motivos" class="tela escondida">
+  <h2>Cadastro de Motivos de Desperdício</h2>
+
+  <form id="formMotivo">
+    <input type="text" id="nomeMotivo" placeholder="Motivo do desperdício" required>
+    <button type="submit">Cadastrar motivo</button>
+  </form>
+
+  <ul id="listaMotivos"></ul>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
