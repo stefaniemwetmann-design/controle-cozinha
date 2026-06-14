@@ -261,6 +261,6 @@ app.get("/api/relatorio", (req, res) => {
 
   res.json(registros);
 });
-app.listen(PORT, () => {
-  console.log(`Sistema rodando em http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Sistema rodando na porta ${PORT}`);
 });
